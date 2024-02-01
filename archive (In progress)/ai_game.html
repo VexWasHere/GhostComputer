@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple RPG Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #game-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <h1>RPG Adventure</h1>
+    <p>Welcome to the world of fantasy! You are a brave adventurer.</p>
+    
+    <div id="character-info">
+        <h2>Character Info</h2>
+        <p>Name: [Your Character Name]</p>
+        <p>Class: [Your Character Class]</p>
+        <p>Level: [Your Character Level]</p>
+    </div>
+
+    <div id="storyline">
+        <h2>Storyline</h2>
+        <p>Once upon a time...</p>
+        <p id="story-text">You find yourself at the entrance of a mysterious dungeon. What do you want to do?</p>
+        <button onclick="startAdventure()">Start Adventure</button>
+    </div>
+</div>
+
+<script>
+    function startAdventure() {
+        document.getElementById('story-text').innerHTML = "You enter the dungeon and encounter a fearsome dragon!";
+        document.getElementById('character-info').innerHTML += "<p>Health: 100</p><p>Attack: 20</p>";
+        document.getElementById('storyline').innerHTML += "<button onclick='attackDragon()'>Attack the Dragon</button>";
+    }
+
+    function attackDragon() {
+        var damage = Math.floor(Math.random() * 10) + 1; // Random damage between 1 and 10
+        document.getElementById('story-text').innerHTML = "You attack the dragon and deal " + damage + " damage!";
+        document.getElementById('character-info').innerHTML = "<p>Health: " + (100 - damage) + "</p><p>Attack: 20</p>";
+
+        if (damage >= 10) {
+            document.getElementById('story-text').innerHTML += "<p>The dragon is defeated! You are victorious!</p>";
+            document.getElementById('storyline').innerHTML = "<button onclick='restartGame()'>Play Again</button>";
+        } else {
+            document.getElementById('story-text').innerHTML += "<p>The dragon counterattacks!</p>";
+            document.getElementById('storyline').innerHTML = "<button onclick='attackDragon()'>Attack Again</button>";
+        }
+    }
+
+    function restartGame() {
+        document.getElementById('story-text').innerHTML = "You find yourself at the entrance of a mysterious dungeon. What do you want to do?";
+        document.getElementById('character-info').innerHTML = "<h2>Character Info</h2><p>Name: [Your Character Name]</p><p>Class: [Your Character Class]</p><p>Level: [Your Character Level]</p>";
+        document.getElementById('storyline').innerHTML = "<button onclick='startAdventure()'>Start Adventure</button>";
+    }
+</script>
+
+</body>
+</html>

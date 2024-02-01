@@ -1,0 +1,46 @@
+<button id="subscribe" >
+    SUBSCRIBE
+</button>
+<button class="joinbtn">JOIN</button>
+<input type="search" />
+<style>
+    #subscribe {
+        background-color: red;
+        border: 2px solid red;
+        border-radius: 18px;
+        color: white;
+        height: 36px;
+        padding-left: 16px;
+        padding-right: 16px;
+        transition: opacity 0.15s;
+    }
+
+    #subscribe:hover {
+        opacity: 0.75;
+    }
+
+    #subscribe:active {
+        opacity: 0.2;
+    }
+
+
+</style>
+<script>
+    var btn = document.getElementById("subscribe");
+    btn.addEventListener('click', function() {
+        if (!subscribed) {
+            console.log("Subscribed!");
+            btn.style.backgroundColor = 'grey';
+            btn.style.border = '2px solid grey'
+            btn.innerHTML = "UNSUBSCRIBE";
+        } else {
+            console.log("Unsubscribed!");
+            btn.style.backgroundColor = 'red';
+            btn.style.border = '2px solid red';
+            btn.innerHTML = "SUBSCRIBE";
+        }
+        subscribed = !subscribed;
+    });
+
+    var subscribed = false;
+</script>
