@@ -4,7 +4,10 @@ from time import strftime
 from datetime import *
 import pyttsx3 as tts
 import speech_recognition as sr
-
+import comp_control
+import basic_functions
+import json
+from tkinter import ttk
 
 # Use #242424 as background color to blend in with device if using dark mode
 # Use white for light mode
@@ -15,9 +18,15 @@ name = "Vex"
 
 #functions down here
 
+show_time = True  # Global variable to keep track of whether to show the time label
+
+entries = []  # Initialize an empty list to store the entries
+
 def update_time():
-    string_time = "The time is currently " + strftime('%I:%M %p')  # Change here to display time in AM/PM format
-    time_label.config(text=string_time)
+    global show_time
+    if show_time:
+        string_time = "The time is currently " + strftime('%I:%M %p')  # Change here to display time in AM/PM format
+        time_label.config(text=string_time)
     app.after(1000, update_time)
 
 # Create a function to add a placeholder to an entry
@@ -43,14 +52,26 @@ def add_placeholder(entry, placeholder):
     entry.bind("<FocusIn>", focus)
     entry.bind("<FocusOut>", focus)
 
+def show_input(event):
+    global show_time
+    show_time = False  # Hide the time label
+    welcome_label.config(text="")
+    time_label.config(text="")
+    print_output()
+
+def print_output():
+    input_text = txtbox.get()
+    txtbox.delete(0, tk.END)
+    entries.append(input_text)  # Add the input to the list
+    output_label.config(text="\n".join(entries[::1]))  # Display the list in reverse order
 
 app = ct.CTk()
 
-app.title("My App")
+app.title("da muhfukin app")
 
 # Window geometrics
-window_width = 600
-window_height = 200
+window_width = 900
+window_height = 600
 
 screen_width = app.winfo_screenwidth()
 screen_height = app.winfo_screenheight()
@@ -70,16 +91,18 @@ app.resizable(False, False)
 
 # App content below
 
-welcome_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white', text=f"Welcome, {name}!")
+welcome_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white', text=f"Welcome, {name}")
 welcome_label.pack(padx=0, pady=0, anchor='center')
 
 time_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white')
 time_label.pack(padx=1.0, pady=1.0, anchor='center')
 
-entry = ct.CTkEntry(app, placeholder_text="What do you want cuh?")
-entry.pack(ipadx=200, ipady=5, padx=1, pady=5, anchor="center")
+output_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white')
+output_label.pack(padx=1.0, pady=1.0, anchor="center")
 
-
+txtbox = ct.CTkEntry(app, placeholder_text="What do you want cuh?")
+txtbox.pack(ipadx=250, ipady=5, padx=1, pady=200, anchor="center")
+txtbox.bind('<Return>', show_input)
 
 update_time()
 
