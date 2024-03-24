@@ -7,7 +7,9 @@ import speech_recognition as sr
 import comp_control
 import basic_functions
 import json
-from tkinter import ttk
+from tkinter import Image, PhotoImage, ttk
+from PIL import Image
+from customtkinter import *
 
 # Use #242424 as background color to blend in with device if using dark mode
 # Use white for light mode
@@ -52,18 +54,10 @@ def add_placeholder(entry, placeholder):
     entry.bind("<FocusIn>", focus)
     entry.bind("<FocusOut>", focus)
 
-def show_input(event):
-    global show_time
-    show_time = False  # Hide the time label
-    welcome_label.config(text="")
-    time_label.config(text="")
-    print_output()
+def show_tabs():
+    print("placeholder")
 
-def print_output():
-    input_text = txtbox.get()
-    txtbox.delete(0, tk.END)
-    entries.append(input_text)  # Add the input to the list
-    output_label.config(text="\n".join(entries[::1]))  # Display the list in reverse order
+
 
 app = ct.CTk()
 
@@ -89,20 +83,49 @@ app.iconbitmap('./icons/Skater xbox pfp.ico')
 
 app.resizable(False, False)
 
+ct.set_appearance_mode("system")
+appearance_mode = get_appearance_mode()
+if appearance_mode == "Dark":
+    print("Dark mode")
+elif appearance_mode == "Light":
+    print("Light mode")
+
 # App content below
 
-welcome_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white', text=f"Welcome, {name}")
-welcome_label.pack(padx=0, pady=0, anchor='center')
+home_img = ct.CTkImage(light_image=Image.open("home.png"),
+                                  dark_image=Image.open("home.png"),
+                                  size=(30, 30))
+tasks_img = ct.CTkImage(light_image=Image.open("tasks.png"),
+                                  dark_image=Image.open("tasks.png"),
+                                  size=(30, 30))
+chat_img = ct.CTkImage(light_image=Image.open("chat.png"),
+                                  dark_image=Image.open("chat.png"),
+                                  size=(30, 30))
+data_img = ct.CTkImage(light_image=Image.open("data.png"),
+                                  dark_image=Image.open("data.png"),
+                                  size=(30, 30))
+settings_img = ct.CTkImage(light_image=Image.open("settings.png"),
+                                  dark_image=Image.open("settings.png"),
+                                  size=(30, 30))
 
 time_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white')
-time_label.pack(padx=1.0, pady=1.0, anchor='center')
+time_label.pack(padx=0, pady=0, anchor='center')
 
-output_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white')
-output_label.pack(padx=1.0, pady=1.0, anchor="center")
+#Bottom navigation will consist of 5 buttons in this exact order: Home, Tasks, Chat, Data, Settings
+home_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=home_img, text="")
+home_btn.pack(padx=0, pady=15, anchor='w')
 
-txtbox = ct.CTkEntry(app, placeholder_text="What do you want cuh?")
-txtbox.pack(ipadx=250, ipady=5, padx=1, pady=200, anchor="center")
-txtbox.bind('<Return>', show_input)
+tasks_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=tasks_img, text="")
+tasks_btn.pack(padx=0, pady=30, anchor='w')
+
+chat_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=chat_img, text="")
+chat_btn.pack(padx=0, pady=45, anchor='w')
+
+data_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=data_img, text="")
+data_btn.pack(padx=0, pady=60, anchor='w')
+
+settings_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', image=settings_img, text="")
+settings_btn.pack(padx=0, pady=75, anchor='w')
 
 update_time()
 
