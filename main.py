@@ -111,23 +111,36 @@ settings_img = ct.CTkImage(light_image=Image.open("settings.png"),
 time_label = tk.Label(app, font=('calibri', 40, 'bold'), background='#242424', foreground='white')
 time_label.pack(padx=0, pady=0, anchor='center')
 
-#Bottom navigation will consist of 5 buttons in this exact order: Home, Tasks, Chat, Data, Settings
-home_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=home_img, text="")
-home_btn.pack(padx=0, pady=15, anchor='w')
 
-tasks_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=tasks_img, text="")
-tasks_btn.pack(padx=0, pady=30, anchor='w')
+def show_home_content():
+    global some_label
+    some_label = tk.Label(app, text="Wazzap?")
+    some_label.pack(padx=0, pady=0, anchor='center')
+
+def hide_home_content():
+    some_label.pack_forget()
+
+home_label = ct.CTkLabel(app, font=('calibri', 40, 'bold'), text="Home stuff", bg_color='#242424', fg_color='white')
+home_label.pack(padx=0, pady=50, anchor='center')
+
+#Bottom navigation will consist of 5 buttons in this exact order: Home, Tasks, Chat, Data, Settings
+home_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=home_img, text="", command=show_home_content())
+home_btn.pack(padx=0, pady=0, anchor='n')
+
+tasks_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=tasks_img, text="", command=hide_home_content())
+tasks_btn.pack(padx=20, pady=30, anchor='n')
 
 chat_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=chat_img, text="")
-chat_btn.pack(padx=0, pady=45, anchor='w')
+chat_btn.pack(padx=30, pady=0, anchor='n')
 
 data_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=data_img, text="")
-data_btn.pack(padx=0, pady=60, anchor='w')
+data_btn.pack(padx=40, pady=0, anchor='n')
 
 settings_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', image=settings_img, text="")
-settings_btn.pack(padx=0, pady=75, anchor='w')
+settings_btn.pack(padx=50, pady=0, anchor='n')
 
 update_time()
 
 if __name__ == '__main__':
     app.mainloop()
+    

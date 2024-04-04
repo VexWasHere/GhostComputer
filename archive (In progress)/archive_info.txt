@@ -1,14 +1,13 @@
 Welcome, user!
-This folder [should] contain files of old or scrapped ideas. This was made to show you the progress I've made over time (and not because I [accidentally] deleted all of my files).
-I will include many things such as:
+This folder [should] contain files of old or new random ideas. This was made to show you the progress I and others have made over time (and not because I [accidentally] deleted all of my files).
+I may include many things such as:
 -Old files(original ideas)
 -List of old ideas and thought process
 -Friend's projects (Showing off their coding skills ._.)
--This file
+-This file "archive_info.txt"
 -Random pictures
--Etc.
 
 Btw, I might keep this when developing whatever python project I feel like. Just as a little joke.
 Thank you and I hope you enjoy what's next to come!
 
--Charles "Vex" Harper
+-Charles "Vex" Harper (Creator)
