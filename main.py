@@ -4,8 +4,8 @@ from time import strftime
 from datetime import *
 import pyttsx3 as tts
 import speech_recognition as sr
-import comp_control
-import basic_functions
+import unfinished.comp_control as comp_control
+import unfinished.basic_functions as basic_functions
 import json
 from tkinter import Image, PhotoImage, ttk
 from PIL import Image
@@ -113,31 +113,64 @@ time_label.pack(padx=0, pady=0, anchor='center')
 
 
 def show_home_content():
-    global some_label
-    some_label = tk.Label(app, text="Wazzap?")
-    some_label.pack(padx=0, pady=0, anchor='center')
+    home_label.pack(padx=0, pady=0, anchor='center', side=TOP)
+    tasks_label.pack_forget()
+    chat_label.pack_forget()
+    data_label.pack_forget()
+    settings_label.pack_forget()
 
-def hide_home_content():
-    some_label.pack_forget()
+def show_tasks_content():
+    tasks_label.pack()
+    home_label.pack_forget()
+    chat_label.pack_forget()
+    data_label.pack_forget()
+    settings_label.pack_forget()
 
-home_label = ct.CTkLabel(app, font=('calibri', 40, 'bold'), text="Home stuff", bg_color='#242424', fg_color='white')
-home_label.pack(padx=0, pady=50, anchor='center')
+def show_chat_content():
+    chat_label.pack(padx=0, pady=0, anchor='center', side=TOP)
+    home_label.pack_forget()
+    tasks_label.pack_forget()
+    data_label.pack_forget()
+    settings_label.pack_forget()
+
+def show_data_content():
+    data_label.pack(padx=0, pady=0, anchor='center', side=TOP)
+    home_label.pack_forget()
+    tasks_label.pack_forget()
+    chat_label.pack_forget()
+    settings_label.pack_forget()
+
+def show_settings_content():
+    data_label.pack(padx=0, pady=0, anchor='center', side=TOP)
+    home_label.pack_forget()
+    tasks_label.pack_forget()
+    chat_label.pack_forget()
+    data_label.pack_forget()
+
+
 
 #Bottom navigation will consist of 5 buttons in this exact order: Home, Tasks, Chat, Data, Settings
 home_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=home_img, text="", command=show_home_content())
 home_btn.pack(padx=0, pady=0, anchor='n')
 
-tasks_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=tasks_img, text="", command=hide_home_content())
+tasks_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=tasks_img, text="", command=show_tasks_content())
 tasks_btn.pack(padx=20, pady=30, anchor='n')
 
-chat_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=chat_img, text="")
+chat_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=chat_img, text="", command=show_chat_content())
 chat_btn.pack(padx=30, pady=0, anchor='n')
 
-data_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=data_img, text="")
+data_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', text_color='white', image=data_img, text="", command=show_data_content())
 data_btn.pack(padx=40, pady=0, anchor='n')
 
-settings_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', image=settings_img, text="")
+settings_btn = ct.CTkButton(app, font=('calibri', 40, 'bold'), bg_color='#242424', fg_color='#242424', image=settings_img, text="", command=show_settings_content())
 settings_btn.pack(padx=50, pady=0, anchor='n')
+
+global home_label, tasks_label, chat_label, data_label, settings_label
+home_label = ct.CTkLabel(app, text="Home")
+tasks_label = ct.CTkLabel(app, text="Tasks")
+chat_label = ct.CTkLabel(app, text="Chat")
+data_label = ct.CTkLabel(app, text="Data")
+settings_label = ct.CTkLabel(app, text="Settings")
 
 update_time()
 
